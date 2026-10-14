@@ -321,3 +321,443 @@ footer small { display: block; margin-top: 12px; color: var(--muted); font: ital
   .rsvp-card { padding: 40px 22px; }
   .floating-actions { width: calc(100% - 14px); bottom: 7px; }
 }
+
+/* =========================================================
+   V3 MOBILE RELIABILITY + RSVP CONFIRMATION POPUP
+========================================================= */
+html {
+  max-width: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  max-width: 100%;
+  min-height: 100dvh;
+  touch-action: pan-y;
+  overscroll-behavior-y: auto;
+}
+
+body.locked {
+  height: 100dvh;
+  overflow: hidden !important;
+}
+
+.invitation {
+  overflow: visible;
+}
+
+/* RSVP success overlay */
+.rsvp-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: grid;
+  place-items: center;
+  padding: max(22px, env(safe-area-inset-top)) 18px max(22px, env(safe-area-inset-bottom));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .35s ease, visibility .35s ease;
+}
+
+.rsvp-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.rsvp-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(41, 44, 36, .66);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+
+.rsvp-modal-card {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 480px);
+  max-height: min(760px, calc(100dvh - 40px));
+  overflow-y: auto;
+  padding: 58px 42px 38px;
+  border: 1px solid rgba(180, 156, 103, .55);
+  border-radius: 3px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(180,156,103,.12), transparent 30%),
+    linear-gradient(180deg, #fbf7ef 0%, #f5eee4 100%);
+  box-shadow: 0 35px 90px rgba(22, 25, 18, .35);
+  text-align: center;
+  transform: translateY(22px) scale(.97);
+  transition: transform .45s cubic-bezier(.2,.8,.2,1);
+}
+
+.rsvp-modal.is-open .rsvp-modal-card {
+  transform: translateY(0) scale(1);
+}
+
+.rsvp-modal-card::before,
+.rsvp-modal-card::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-color: rgba(180, 156, 103, .42);
+  pointer-events: none;
+}
+
+.rsvp-modal-card::before {
+  left: 14px;
+  top: 14px;
+  border-left: 1px solid;
+  border-top: 1px solid;
+}
+
+.rsvp-modal-card::after {
+  right: 14px;
+  bottom: 14px;
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.rsvp-modal-close {
+  position: absolute;
+  z-index: 3;
+  top: 13px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  background: transparent;
+  color: #756d61;
+  font: 300 30px/1 var(--serif);
+  cursor: pointer;
+}
+
+.rsvp-modal-mark {
+  width: 72px;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 24px;
+  border: 1px solid #a3aa93;
+  border-radius: 50%;
+  background: #e9ecdf;
+  color: var(--olive-dark);
+  font: 400 34px/1 var(--serif);
+  box-shadow: 0 10px 25px rgba(68,75,61,.10);
+}
+
+.rsvp-modal.is-decline .rsvp-modal-mark {
+  background: #f1e3df;
+  border-color: #c8a39c;
+  color: var(--wine);
+}
+
+.rsvp-modal-card h2 {
+  margin: 12px 0 14px;
+  color: var(--ink);
+  font: 400 clamp(38px, 7vw, 55px)/1 var(--display);
+}
+
+.rsvp-modal-message {
+  max-width: 360px;
+  margin: 0 auto;
+  color: #746e65;
+  font: 400 18px/1.65 var(--serif);
+}
+
+.rsvp-modal-divider {
+  position: relative;
+  width: 180px;
+  height: 1px;
+  margin: 27px auto 24px;
+  background: linear-gradient(90deg, transparent, #b49c67, transparent);
+}
+
+.rsvp-modal-divider span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  padding: 0 9px;
+  transform: translate(-50%, -50%);
+  background: #f8f2e8;
+  color: var(--gold);
+  font-size: 11px;
+}
+
+.rsvp-modal-signoff {
+  color: #777066;
+  font: italic 400 16px/1.55 var(--serif);
+}
+
+.rsvp-modal-signoff strong {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--wine);
+  font: 400 31px/1 var(--script);
+}
+
+.rsvp-modal-button {
+  width: 100%;
+  margin-top: 29px;
+  padding: 16px 18px;
+  border: 0;
+  background: var(--olive-dark);
+  color: #f8f3e9;
+  font-size: 8px;
+  letter-spacing: 3px;
+  cursor: pointer;
+}
+
+body.rsvp-modal-open {
+  overflow: hidden !important;
+}
+
+/* Better touch targets without changing the visual style */
+.floating-actions button,
+.rsvp-button,
+.venue-card a,
+.wax-seal {
+  touch-action: manipulation;
+}
+
+@media (max-width: 760px) {
+  .section {
+    padding-top: clamp(70px, 18vw, 100px);
+    padding-bottom: clamp(70px, 18vw, 100px);
+  }
+
+  .hero-card {
+    min-height: auto;
+    padding-top: 22px;
+  }
+
+  .hero-inner {
+    padding-top: 55px;
+  }
+
+  .story-copy h2,
+  .venue-section h2,
+  .gallery-section h2,
+  .rsvp-card h2,
+  .countdown h2,
+  .schedule-section h2 {
+    overflow-wrap: anywhere;
+  }
+
+  .portrait {
+    height: min(68svh, 620px);
+  }
+
+  .venue-card {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  .photo-break .editorial-photo {
+    height: min(72svh, 650px);
+  }
+
+  .floating-actions {
+    padding-bottom: max(7px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 430px) {
+  .olive-bar {
+    min-height: 42px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .olive-bar > span {
+    font-size: 7px;
+    letter-spacing: 2px;
+  }
+
+  .section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .hero-card {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .hero-inner {
+    padding: 48px 2px 46px;
+  }
+
+  .overline,
+  .tiny-caps {
+    font-size: 7px;
+    letter-spacing: 3px;
+  }
+
+  .invite-line {
+    font-size: 16px;
+  }
+
+  .couple-names {
+    font-size: clamp(54px, 17vw, 68px);
+  }
+
+  .date-lockup {
+    gap: 8px;
+  }
+
+  .date-lockup strong {
+    padding: 0 12px;
+    font-size: 58px;
+  }
+
+  .date-lockup span {
+    min-width: 56px;
+    letter-spacing: 2px;
+  }
+
+  .hero-place {
+    font-size: 8px;
+    letter-spacing: 2.1px;
+  }
+
+  .personal-line {
+    font-size: 15px;
+  }
+
+  .wide-photo {
+    height: min(108vw, 430px);
+  }
+
+  .story-copy > p:not(.overline) {
+    font-size: 17px;
+  }
+
+  .venue-section h2,
+  .gallery-section h2,
+  .rsvp-card h2,
+  .story-copy h2 {
+    font-size: clamp(39px, 12vw, 52px);
+  }
+
+  .venue-card h3 {
+    font-size: 32px;
+  }
+
+  .schedule-row {
+    grid-template-columns: 68px 1fr;
+    gap: 12px;
+    padding: 23px 0;
+  }
+
+  .schedule-row time {
+    font-size: 20px;
+  }
+
+  .schedule-row b {
+    font-size: 24px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-grid figure:first-child {
+    grid-column: auto;
+  }
+
+  .gallery-grid figure,
+  .gallery-grid figure:first-child {
+    height: min(110vw, 430px);
+  }
+
+  .rsvp-section {
+    padding-top: 95px;
+    padding-bottom: 125px;
+  }
+
+  .rsvp-card {
+    padding: 38px 19px;
+  }
+
+  .rsvp-card fieldset label {
+    min-height: 50px;
+  }
+
+  .field select,
+  .field textarea {
+    font-size: 16px; /* prevents iOS zooming inputs */
+  }
+
+  .floating-actions {
+    width: calc(100% - 12px);
+    border-radius: 16px;
+  }
+
+  .floating-actions button {
+    min-height: 54px;
+  }
+
+  .floating-actions span {
+    font-size: 18px;
+  }
+
+  .rsvp-modal {
+    align-items: center;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .rsvp-modal-card {
+    padding: 52px 25px 30px;
+  }
+
+  .rsvp-modal-card h2 {
+    font-size: 39px;
+  }
+
+  .rsvp-modal-message {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 350px) {
+  .couple-names {
+    font-size: 50px;
+  }
+
+  .date-lockup strong {
+    font-size: 50px;
+    padding: 0 9px;
+  }
+
+  .date-lockup span {
+    min-width: 48px;
+    font-size: 6px;
+  }
+
+  .countdown-grid strong {
+    font-size: 27px;
+  }
+
+  .floating-actions small {
+    font-size: 5px;
+    letter-spacing: .8px;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 560px) {
+  .envelope-stage {
+    width: min(68vw, 470px);
+  }
+
+  .seal-instruction {
+    margin-top: 12px;
+  }
+
+  .floating-actions {
+    width: min(calc(100% - 24px), 470px);
+  }
+}

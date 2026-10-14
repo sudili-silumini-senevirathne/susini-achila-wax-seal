@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Italiana&family=Montserrat:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body class="locked">
 
@@ -200,6 +200,21 @@
       </div>
     </section>
 
+    <!-- RSVP SUCCESS POPUP -->
+    <div class="rsvp-modal" id="rsvpModal" aria-hidden="true">
+      <div class="rsvp-modal-backdrop" data-close-rsvp></div>
+      <div class="rsvp-modal-card" role="dialog" aria-modal="true" aria-labelledby="rsvpModalTitle">
+        <button type="button" class="rsvp-modal-close" data-close-rsvp aria-label="Close RSVP confirmation">×</button>
+        <div class="rsvp-modal-mark" id="rsvpModalMark" aria-hidden="true">✓</div>
+        <p class="overline">RSVP RECEIVED</p>
+        <h2 id="rsvpModalTitle">Thank you</h2>
+        <p class="rsvp-modal-message" id="rsvpModalMessage">Your response has been noted.</p>
+        <div class="rsvp-modal-divider"><span>✦</span></div>
+        <p class="rsvp-modal-signoff">With love,<br><strong>Susini &amp; Achila</strong></p>
+        <button type="button" class="rsvp-modal-button" data-close-rsvp>CONTINUE</button>
+      </div>
+    </div>
+
     <footer>
       <div class="mini-monogram big">S <i>&</i> A</div>
       <p>16 • 05 • 2027</p>
@@ -207,6 +222,6 @@
     </footer>
   </main>
 
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

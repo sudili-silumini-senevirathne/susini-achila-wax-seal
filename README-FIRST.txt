@@ -1,31 +1,36 @@
-SUSINI & ACHILA — MODERN WAX-SEAL INVITATION
-===============================================
+SUSINI & ACHILA — MODERN WAX-SEAL INVITATION V3
+================================================
 
-THIS IS THE DESIGN-APPROVAL VERSION ONLY.
+This is the design-approval version.
+The Google Sheet / Apps Script backend is NOT connected yet.
 
-Included:
-- Wax-seal envelope opening inspired by the supplied sample video
-- Ivory textured paper / olive green / gold editorial styling
-- Only pre-shoot photos are used
-- The wedding back-side photo (hero.jpeg) is intentionally NOT included
-- Existing A Thousand Years audio file included
-- Countdown
-- Ceremony + reception details
-- Google Maps buttons
-- Save-the-date calendar file generation
-- Demo RSVP interface
-- Auto-scroll that pauses during manual scrolling and automatically resumes after the guest stops scrolling
-- Responsive mobile / tablet / desktop layout
+V3 FIXES
+--------
+1. MOBILE RESPONSIVE
+   - Optimized for iPhone and Android widths, including very small phones.
+   - Mobile-friendly photo sizes, typography, RSVP form, floating buttons,
+     safe-area spacing and landscape handling.
 
-Event details currently used:
-Susini & Achila
-Sunday, 16 May 2027
-Church Mass — 9:00 AM — St. Jude's Church, Daluwakotuwa
-Reception — 11:00 AM — Olanro Hotel, Negombo
+2. MOBILE AUTO-SCROLL
+   - Starts automatically after the wax seal invitation opens.
+   - Uses a floating-point internal scroll position so slow scrolling works
+     reliably on mobile browsers that round scrollTop values.
+   - Manual touch/wheel/keyboard scrolling pauses it immediately.
+   - It automatically resumes about 3 seconds after the guest stops.
+   - It pauses while the guest is using the RSVP form or RSVP popup.
 
-Personalized demo preview example:
+3. RSVP CONFIRMATION POPUP
+   - Press SEND RSVP after choosing an answer.
+   - A styled confirmation popup appears with the guest name.
+   - The popup has separate wording for accepting or declining.
+   - This is demo-only until the Google Apps Script backend is connected.
+
+PERSONALIZED DEMO LINK
+----------------------
 index.html?name=Miss%20Sudili&max=2
 
-IMPORTANT:
-Google Sheets / Apps Script are NOT included yet, exactly as requested.
-Once this design is approved, the secure RSVP backend and guest sheet can be connected as the next step.
+IMPORTANT
+---------
+When you approve this design, connect the real Google Sheet / Apps Script.
+At that stage, the confirmation popup should be shown only after the RSVP
+has successfully been saved to the backend.
