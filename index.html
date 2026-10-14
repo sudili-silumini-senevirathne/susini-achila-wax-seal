@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#5f6752">
+  <meta name="description" content="The wedding invitation of Susini and Achila">
+  <title>Susini & Achila | Wedding Invitation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Italiana&family=Montserrat:wght@300;400;500&family=Parisienne&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body class="locked">
+
+  <!-- =========================================================
+       WAX-SEAL ENVELOPE OPENING
+       Closely follows the mood of the supplied inspiration video:
+       tactile ivory paper, minimal editorial typography, wax seal.
+  ========================================================== -->
+  <section class="envelope-screen" id="envelopeScreen" aria-label="Open wedding invitation">
+    <div class="paper-grain"></div>
+    <div class="envelope-stage">
+      <div class="envelope" id="envelope">
+        <div class="envelope-back"></div>
+        <div class="envelope-letter">
+          <p class="tiny-caps">THE WEDDING OF</p>
+          <h1>Susini <span>&</span> Achila</h1>
+          <p>16 • 05 • 2027</p>
+        </div>
+        <div class="flap flap-left"></div>
+        <div class="flap flap-right"></div>
+        <div class="flap flap-bottom"></div>
+        <div class="flap flap-top"></div>
+        <button class="wax-seal" id="openInvitation" type="button" aria-label="Tap the seal to open invitation">
+          <img src="assets/wax-seal.svg" alt="">
+        </button>
+      </div>
+      <p class="seal-instruction">TAP THE SEAL TO OPEN</p>
+    </div>
+  </section>
+
+  <audio id="weddingAudio" preload="auto" playsinline loop>
+    <source src="audio/a-thousand-years.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating controls echo the mobile invitation controls from the inspiration -->
+  <nav class="floating-actions" id="floatingActions" aria-label="Invitation shortcuts" hidden>
+    <button type="button" id="musicToggle" aria-label="Play or pause music"><span>♪</span><small>MUSIC</small></button>
+    <button type="button" id="calendarBtn" aria-label="Save the date"><span>▣</span><small>SAVE</small></button>
+    <button type="button" id="locationBtn" aria-label="View location"><span>⌖</span><small>MAP</small></button>
+    <button type="button" id="rsvpShortcut" aria-label="Go to RSVP"><span>✉</span><small>RSVP</small></button>
+  </nav>
+
+  <main class="invitation" id="invitation">
+
+    <!-- TOP BAR -->
+    <div class="olive-bar">
+      <div class="mini-monogram">S <i>&</i> A</div>
+      <span>16 MAY 2027</span>
+    </div>
+
+    <!-- HERO INVITATION -->
+    <section class="hero-card section" id="top">
+      <img class="botanical-top" src="assets/botanical.svg" alt="">
+      <div class="hero-inner reveal">
+        <p class="overline">TOGETHER WITH THEIR FAMILIES</p>
+        <div class="ornament">✦</div>
+        <p class="invite-line">joyfully invite you to celebrate their wedding</p>
+        <h1 class="couple-names">Susini <span>&</span> Achila</h1>
+        <div class="gold-line"><span>✤</span></div>
+        <div class="date-lockup">
+          <span>SUNDAY</span>
+          <strong>16</strong>
+          <span>MAY<br>2027</span>
+        </div>
+        <p class="hero-place">ST. JUDE'S CHURCH • DALUWAKOTUWA</p>
+        <p class="hero-place muted">RECEPTION • OLANRO HOTEL, NEGOMBO</p>
+        <p class="personal-line">Especially for <strong id="guestName">Our Dear Guest</strong></p>
+      </div>
+
+      <!-- Only PRE-SHOOT image used here -->
+      <figure class="editorial-photo wide-photo reveal">
+        <img src="images/main-photo.jpeg" alt="Susini and Achila pre-shoot by the sea">
+      </figure>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="countdown section olive-section" id="countdownSection">
+      <div class="section-inner reveal">
+        <p class="overline light">COUNTING DOWN</p>
+        <h2>Until we say “I do”</h2>
+        <div class="countdown-grid">
+          <div><strong id="days">00</strong><span>DAYS</span></div>
+          <div><strong id="hours">00</strong><span>HOURS</span></div>
+          <div><strong id="minutes">00</strong><span>MIN</span></div>
+          <div><strong id="seconds">00</strong><span>SEC</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHOTO / NOTE -->
+    <section class="section story-section">
+      <div class="split-layout">
+        <figure class="editorial-photo portrait reveal"><img src="images/photo1.jpeg" alt="Susini and Achila pre-shoot portrait"></figure>
+        <div class="story-copy reveal">
+          <p class="overline">A DAY TO REMEMBER</p>
+          <h2>Our forever begins here.</h2>
+          <p>With joyful hearts, we invite you to share the beginning of our next chapter and celebrate a day filled with faith, family and love.</p>
+          <div class="signature">Susini & Achila</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VENUES -->
+    <section class="section venue-section" id="venue">
+      <div class="section-inner reveal">
+        <p class="overline">THE VENUES</p>
+        <h2>Two moments. One beautiful day.</h2>
+        <div class="venue-grid">
+          <article class="venue-card">
+            <span class="venue-number">01</span>
+            <p class="tiny-caps">THE CEREMONY</p>
+            <h3>St. Jude's Church</h3>
+            <p>Daluwakotuwa</p>
+            <strong>09:00 AM</strong>
+            <a href="https://www.google.com/maps/search/?api=1&query=St.+Jude%27s+Church+Daluwakotuwa+Sri+Lanka" target="_blank" rel="noopener">VIEW LOCATION</a>
+          </article>
+          <article class="venue-card">
+            <span class="venue-number">02</span>
+            <p class="tiny-caps">THE RECEPTION</p>
+            <h3>Olanro Hotel</h3>
+            <p>Negombo</p>
+            <strong>11:00 AM</strong>
+            <a href="https://www.google.com/maps/search/?api=1&query=Olanro+Hotel+Negombo+Sri+Lanka" target="_blank" rel="noopener">VIEW LOCATION</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECOND PRE-SHOOT PHOTO -->
+    <section class="photo-break section">
+      <figure class="editorial-photo reveal"><img src="images/photo2.jpeg" alt="Susini and Achila pre-shoot by the ocean"></figure>
+      <blockquote class="reveal">“Whatever our souls are made of, his and mine are the same.”</blockquote>
+    </section>
+
+    <!-- DAY SCHEDULE -->
+    <section class="section schedule-section">
+      <div class="section-inner reveal">
+        <p class="overline light">OUR WEDDING DAY</p>
+        <h2>The order of the day</h2>
+        <div class="schedule-list">
+          <div class="schedule-row"><time>08:30</time><span><b>Guests arrive</b><small>St. Jude's Church</small></span></div>
+          <div class="schedule-row"><time>09:00</time><span><b>Church Mass</b><small>Wedding ceremony</small></span></div>
+          <div class="schedule-row"><time>11:00</time><span><b>Reception begins</b><small>Olanro Hotel, Negombo</small></span></div>
+          <div class="schedule-row"><time>12:15</time><span><b>Celebration</b><small>Lunch • speeches • memories</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY, PRE-SHOOT ONLY -->
+    <section class="section gallery-section">
+      <div class="section-inner">
+        <p class="overline reveal">US, BEFORE THE BIG DAY</p>
+        <h2 class="reveal">A few moments we love.</h2>
+        <div class="gallery-grid">
+          <figure class="reveal"><img src="images/photo3.jpeg" alt="Pre-shoot at sunset"></figure>
+          <figure class="reveal"><img src="images/photo1.jpeg" alt="Pre-shoot portrait"></figure>
+          <figure class="reveal"><img src="images/photo2.jpeg" alt="Pre-shoot by the sea"></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section class="section rsvp-section" id="rsvp">
+      <img class="botanical-bottom" src="assets/botanical.svg" alt="">
+      <div class="rsvp-card reveal">
+        <p class="overline">KINDLY REPLY</p>
+        <h2>Will you celebrate with us?</h2>
+        <p class="rsvp-sub">We would be delighted to celebrate with you.</p>
+
+        <form id="rsvpForm">
+          <input type="hidden" id="rsvpName" name="name" value="Our Dear Guest">
+          <fieldset>
+            <legend>Will you be joining us?</legend>
+            <label><input type="radio" name="attendance" value="Yes" required> Joyfully accepts</label>
+            <label><input type="radio" name="attendance" value="No" required> Regretfully declines</label>
+          </fieldset>
+          <label class="field" id="guestCountGroup">Number attending
+            <select id="guestCount" name="guestCount"></select>
+          </label>
+          <label class="field">A note for the couple
+            <textarea id="guestMessage" name="message" rows="4" placeholder="Leave a message..."></textarea>
+          </label>
+          <button type="submit" class="rsvp-button">SEND RSVP</button>
+          <p class="form-result" id="formResult" aria-live="polite"></p>
+        </form>
+        <p class="demo-note">Demo invitation preview</p>
+      </div>
+    </section>
+
+    <footer>
+      <div class="mini-monogram big">S <i>&</i> A</div>
+      <p>16 • 05 • 2027</p>
+      <small>Made with love for Susini & Achila</small>
+    </footer>
+  </main>
+
+  <script src="script.js?v=2"></script>
+</body>
+</html>
